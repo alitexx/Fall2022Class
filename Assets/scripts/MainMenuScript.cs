@@ -16,6 +16,10 @@ public class MainMenuScript : MonoBehaviour
     {
         Time.timeScale = 1f;
         menu.SetActive(false);
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.UnPauseMusic();
+        }
     }
 
 
@@ -62,12 +66,19 @@ public class MainMenuScript : MonoBehaviour
         if (isPaused)
         {
             Time.timeScale = 0f;
+            GameManager.instance.PauseMusic();
         }
         else
         {
             Time.timeScale = 1f;
+            GameManager.instance.UnPauseMusic();
         }
 
     }
 
+
+    public void PlaySound(AudioClip clip)
+    {
+        GameManager.instance.audio.PlayOneShot(clip);
+    }
 }
